@@ -1,6 +1,7 @@
 package com.example.eforezan.kuevents;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -40,13 +41,16 @@ public class PostActivity extends AppCompatActivity {
     private EditText mTitle;
     private EditText mDesc;
     private TextView mDate;
-    private TextView mTime;
+    private TextView mStartTime;
+    private TextView mEndTime;
     private Button mPost;
     private Uri mimageUri = null;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-    private TimePickerDialog.OnTimeSetListener mTimeSetListener;
-
     private static final int GALLERY_REQUEST=1;
+    static final int DIALOG_ID1 = 0;
+    static final int DIALOG_ID2 = 1;
+    int hour_x;
+    int minute_x;
 
     private StorageReference mStorage;
     private DatabaseReference mDatabase;
@@ -106,6 +110,7 @@ public class PostActivity extends AppCompatActivity {
             }
         };
 
+        showTimePickerDialog();
 
         mPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +119,57 @@ public class PostActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected Dialog onCreateDialog(int id){
+        switch (id){
+            case DIALOG_ID1:
+                return  new TimePickerDialog(PostActivity.this, mTimeSetListener, hour_x,minute_x, false);
+            case DIALOG_ID2:
+                return  new TimePickerDialog(PostActivity.this, kTimeSetListener, hour_x, minute_x, false);
+            default:
+                return null;
+        }
+    }
+
+    private void showTimePickerDialog(){
+        mStartTime = (TextView) findViewById(R.id.startTimeField);
+        mEndTime = (TextView) findViewById(R.id.endTimeField);
+        mStartTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog(DIALOG_ID1);
+            }
+        });
+        mEndTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog(DIALOG_ID2);
+            }
+        });
+    }
+
+    protected TimePickerDialog.OnTimeSetListener mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker timePicker, int i, int i1) {
+            hour_x = i;
+            minute_x= i1;
+            String startTime = hour_x+ ":" + minute_x;
+            mStartTime.setText(startTime);
+
+        }
+    };
+
+    protected TimePickerDialog.OnTimeSetListener kTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker timePicker, int i, int i1) {
+            hour_x = i;
+            minute_x = i1;
+            String endTime = hour_x+ ":" + minute_x;
+            mEndTime.setText(endTime);
+        }
+    };
+
 
     private void startPosting(){
         mProgress.setMessage("Posting...");
