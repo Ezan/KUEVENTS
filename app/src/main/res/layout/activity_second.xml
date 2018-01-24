@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.eforezan.kuevents.second">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_margin="200dp"
+        android:text="submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="342dp" />
+
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="306dp"
+        android:layout_height="194dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="38dp">
+
+        <RadioButton
+            android:id="@+id/radio_going"
+            android:layout_width="108dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Going" />
+
+        <RadioButton
+            android:id="@+id/radio_not"
+            android:layout_width="108dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Not Going" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button_showdb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Going list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.586"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.694" />
+
+
+</android.support.constraint.ConstraintLayout>
