@@ -31,7 +31,7 @@ public class second extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        String post_key = getIntent().getExtras().getString("blog_id");
+        String post_key = getIntent().getExtras().getString("blog_id ");
 
         radio_g = (RadioGroup) findViewById(R.id.radio_group);
         int selected_id = radio_g.getCheckedRadioButtonId();
