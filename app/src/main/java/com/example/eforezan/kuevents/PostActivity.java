@@ -40,7 +40,8 @@ public class PostActivity extends AppCompatActivity {
     private ImageButton mSelectImage;
     private EditText mTitle;
     private EditText mDesc;
-    private TextView mDate;
+    private TextView mStartDate;
+    private TextView mEndDate;
     private TextView mStartTime;
     private TextView mEndTime;
     private Button mPost;
@@ -65,7 +66,9 @@ public class PostActivity extends AppCompatActivity {
         mSelectImage=(ImageButton) findViewById(R.id.imageSelect);
         mTitle=(EditText) findViewById(R.id.TitleField);
         mDesc=(EditText) findViewById(R.id.DescField);
-        mDate = (TextView) findViewById(R.id.dateField);
+        mStartDate = (TextView) findViewById(R.id.startDateField);
+        mEndDate = (TextView) findViewById(R.id.endDateField);
+        mEndTime = (TextView) findViewById(R.id.endDateField);
         mPost = (Button) findViewById(R.id.post_btn);
 
         mStorage = FirebaseStorage.getInstance().getReference();
@@ -81,7 +84,7 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
-        mDate.setOnClickListener(new View.OnClickListener() {
+        mStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
@@ -105,7 +108,36 @@ public class PostActivity extends AppCompatActivity {
                 month = month +1;
                 Log.d(TAG, "onDateSet: dd/mm/yy " + day + "/" + month + "/" + year );
                 String date = day + "/" + month + "/" + year;
-                mDate.setText(date);
+                mStartDate.setText(date);
+
+            }
+        };
+
+        mEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog= new DatePickerDialog(
+                        PostActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mDateSetListener=new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month +1;
+                Log.d(TAG, "onDateSet: dd/mm/yy " + day + "/" + month + "/" + year );
+                String date = day + "/" + month + "/" + year;
+                mEndDate.setText(date);
 
             }
         };
@@ -177,7 +209,10 @@ public class PostActivity extends AppCompatActivity {
 
         final String title_value = mTitle.getText().toString().trim();
         final String desc_value = mDesc.getText().toString().trim();
-        final String date_value = mDate.getText().toString().trim();
+        final String startdate_value = mStartDate.getText().toString().trim();
+        final String enddate_value = mEndDate.getText().toString().trim();
+        final String starttime_value = mStartTime.getText().toString().trim();
+        final String endtime_value= mEndTime.getText().toString().trim();
 
         if (!TextUtils.isEmpty(title_value) && !TextUtils.isEmpty(desc_value) && mimageUri!=null){
             mProgress.show();
@@ -191,7 +226,11 @@ public class PostActivity extends AppCompatActivity {
                     newPost.child("title").setValue(title_value);
                     newPost.child("desc").setValue(desc_value);
                     newPost.child("image").setValue(downloadUrl.toString());
-                    newPost.child("date").setValue(date_value);
+                    newPost.child("start date").setValue(startdate_value);
+                    newPost.child("end date").setValue(enddate_value);
+                    newPost.child("start time").setValue(starttime_value);
+                    newPost.child("end time").setValue(endtime_value);
+
 
 
                     mProgress.dismiss();
