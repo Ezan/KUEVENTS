@@ -47,6 +47,7 @@ public class PostActivity extends AppCompatActivity {
     private Button mPost;
     private Uri mimageUri = null;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private DatePickerDialog.OnDateSetListener kDateSetListener;
     private static final int GALLERY_REQUEST=1;
     static final int DIALOG_ID1 = 0;
     static final int DIALOG_ID2 = 1;
@@ -124,14 +125,14 @@ public class PostActivity extends AppCompatActivity {
                 DatePickerDialog dialog= new DatePickerDialog(
                         PostActivity.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mDateSetListener,
+                        kDateSetListener,
                         year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
         });
 
-        mDateSetListener=new DatePickerDialog.OnDateSetListener() {
+        kDateSetListener=new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month +1;
