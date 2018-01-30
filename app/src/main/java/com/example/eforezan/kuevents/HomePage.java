@@ -50,7 +50,6 @@ public class HomePage extends AppCompatActivity {
                 final String post_key = getRef(position).getKey();
 
                 viewHolder.setTitle(model.getTitle());
-                viewHolder.setDesc(model.getDesc());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
                 viewHolder.setDate(model.getDate());
 
@@ -84,11 +83,7 @@ public class HomePage extends AppCompatActivity {
 
         }
 
-        public void setDesc(String desc){
-            TextView post_desc = (TextView) mView.findViewById(R.id.post_desc);
-            post_desc.setText(desc);
 
-        }
 
         public void setImage(Context ctx, String image){
             ImageView post_image = (ImageView) mView.findViewById(R.id.post_image);
