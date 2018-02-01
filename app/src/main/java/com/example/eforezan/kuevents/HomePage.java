@@ -51,8 +51,7 @@ public class HomePage extends AppCompatActivity {
 
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
-                viewHolder.setDate(model.getDate());
-
+                viewHolder.setStart_Date(model.getStart_date());
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -91,9 +90,9 @@ public class HomePage extends AppCompatActivity {
 
         }
 
-        public void setDate(String date){
+        public void setStart_Date(String start_date){
             TextView post_date=(TextView) mView.findViewById(R.id.post_date);
-            post_date.setText(date);
+            post_date.setText(start_date);
         }
     }
 

@@ -32,15 +32,6 @@
             tools:text="Post title goes here" />
 
         <TextView
-            android:id="@+id/post_desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="15dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            tools:text="Post description goes here" />
-
-        <TextView
             android:id="@+id/post_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

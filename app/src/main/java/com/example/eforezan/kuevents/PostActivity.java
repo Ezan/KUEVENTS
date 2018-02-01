@@ -227,10 +227,10 @@ public class PostActivity extends AppCompatActivity {
                     newPost.child("title").setValue(title_value);
                     newPost.child("desc").setValue(desc_value);
                     newPost.child("image").setValue(downloadUrl.toString());
-                    newPost.child("start date").setValue(startdate_value);
-                    newPost.child("end date").setValue(enddate_value);
-                    newPost.child("start time").setValue(starttime_value);
-                    newPost.child("end time").setValue(endtime_value);
+                    newPost.child("start_date").setValue(startdate_value);
+                    newPost.child("end_date").setValue(enddate_value);
+                    newPost.child("start_time").setValue(starttime_value);
+                    newPost.child("end_time").setValue(endtime_value);
 
 
 

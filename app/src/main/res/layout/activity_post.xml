@@ -69,12 +69,26 @@
 
 
             <TextView
-                android:id="@+id/dateField"
+                android:id="@+id/startDateField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:background="@drawable/input_outline"
-                android:hint="Date..."
+                android:hint="Start Date..."
+                android:padding="15dp"
+                app:layout_constraintBottom_toTopOf="@+id/startTimeField"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/DescField" />
+
+            <TextView
+                android:id="@+id/endDateField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/input_outline"
+                android:hint="End Date..."
                 android:padding="15dp"
                 app:layout_constraintBottom_toTopOf="@+id/startTimeField"
                 app:layout_constraintEnd_toEndOf="parent"
