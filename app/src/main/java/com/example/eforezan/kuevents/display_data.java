@@ -65,5 +65,6 @@ public class display_data extends AppCompatActivity {
         });
 
 
+
     }
 }
