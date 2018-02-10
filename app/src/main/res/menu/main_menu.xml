@@ -6,9 +6,14 @@
         android:title="Add Post"
         app:showAsAction="always"/>
 
-    <item android:id="@+id/action_settings"
+    <item android:id="@+id/action_sort"
         android:title="Sort by"
         app:showAsAction="never"/>
+
+    <item android:id="@+id/action_logout"
+        android:title="Log out"
+        app:showAsAction="never"/>
+
 
 
 </menu>
