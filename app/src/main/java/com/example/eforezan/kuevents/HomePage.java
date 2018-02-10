@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -104,9 +105,24 @@ public class HomePage extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_add){
-            startActivity(new Intent(HomePage.this, PostActivity.class));
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                startActivity(new Intent(this, LoginActivity.class));
+
+                break;
+
+            case R.id.action_add:
+                startActivity(new Intent(HomePage.this, PostActivity.class));
+
+                break;
+
         }
+
         return super.onOptionsItemSelected(item);
     }
 }
+
+
