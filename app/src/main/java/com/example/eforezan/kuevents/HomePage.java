@@ -105,8 +105,8 @@ public class HomePage extends AppCompatActivity {
 
         public void setLongitude(double Longitude){
             TextView post_lon = (TextView) mView.findViewById(R.id.post_longitude);
-            String lon = Double.toString(Longitude);
-            post_lon.setText(lon);
+            String longi = Double.toString(Longitude);
+            post_lon.setText(longi);
 
         }
     }
