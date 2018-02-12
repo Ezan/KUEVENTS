@@ -53,6 +53,8 @@ public class HomePage extends AppCompatActivity {
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
                 viewHolder.setStart_Date(model.getStart_date());
+                viewHolder.setLatitude(model.getLatitude());
+                viewHolder.setLongitude(model.getLongitude());
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -83,8 +85,6 @@ public class HomePage extends AppCompatActivity {
 
         }
 
-
-
         public void setImage(Context ctx, String image){
             ImageView post_image = (ImageView) mView.findViewById(R.id.post_image);
             Picasso.with(ctx).load(image).into(post_image);
@@ -94,6 +94,20 @@ public class HomePage extends AppCompatActivity {
         public void setStart_Date(String start_date){
             TextView post_date=(TextView) mView.findViewById(R.id.post_date);
             post_date.setText(start_date);
+        }
+
+        public void setLatitude(double Latitude){
+            TextView post_lat = (TextView) mView.findViewById(R.id.post_latitude);
+            String lat = Double.toString(Latitude);
+            post_lat.setText(lat);
+
+        }
+
+        public void setLongitude(double Longitude){
+            TextView post_lon = (TextView) mView.findViewById(R.id.post_longitude);
+            String lon = Double.toString(Longitude);
+            post_lon.setText(lon);
+
         }
     }
 

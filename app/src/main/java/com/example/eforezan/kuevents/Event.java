@@ -12,12 +12,14 @@ public class Event {
     private String end_date;
     private String start_time;
     private String end_time;
+    private double Latitude;
+    private double Longitude;
 
     public Event(){
 
     }
 
-    public Event(String title, String desc, String image, String start_date, String end_date, String start_time, String end_time) {
+    public Event(String title, String desc, String image, String start_date, String end_date, String start_time, String end_time, double Latitude, double Longitude) {
         this.title = title;
         this.desc = desc;
         this.image = image;
@@ -25,6 +27,9 @@ public class Event {
         this.end_date = end_date;
         this.start_time = start_time;
         this.end_time = end_time;
+        this.Latitude = Latitude;
+        this.Longitude = Longitude;
+
     }
 
     public String getTitle() {
@@ -74,6 +79,16 @@ public class Event {
     public void setEnd_time(String end_time) {
         this.end_time = end_time;
     }
+
+    public double getLatitude(){return Latitude; }
+
+    public void setLatitude(double Latitude){this.Latitude=Latitude; }
+
+    public double getLongitude(){return Longitude; }
+
+    public void setLongitude(double Longitude){this.Latitude=Longitude; }
+
+
 
 }
 

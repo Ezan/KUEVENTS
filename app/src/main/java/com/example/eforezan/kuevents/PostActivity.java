@@ -14,12 +14,16 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,8 +38,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static android.Manifest.permission_group.CALENDAR;
+import static android.location.Location.convert;
 
-public class PostActivity extends AppCompatActivity {
+public class PostActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private ImageButton mSelectImage;
     private EditText mTitle;
@@ -44,6 +49,7 @@ public class PostActivity extends AppCompatActivity {
     private TextView mEndDate;
     private TextView mStartTime;
     private TextView mEndTime;
+    private TextView mLocation;
     private Button mPost;
     private Uri mimageUri = null;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -53,6 +59,7 @@ public class PostActivity extends AppCompatActivity {
     static final int DIALOG_ID2 = 1;
     int hour_x;
     int minute_x;
+    double latitude, longitude;
 
     private StorageReference mStorage;
     private DatabaseReference mDatabase;
@@ -71,9 +78,11 @@ public class PostActivity extends AppCompatActivity {
         mEndDate = (TextView) findViewById(R.id.endDateField);
         mEndTime = (TextView) findViewById(R.id.endDateField);
         mPost = (Button) findViewById(R.id.post_btn);
+        mLocation = (TextView) findViewById(R.id.LocationField);
 
         mStorage = FirebaseStorage.getInstance().getReference();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Events");
+
         mProgress= new ProgressDialog(this);
 
         mSelectImage.setOnClickListener(new View.OnClickListener() {
@@ -151,8 +160,19 @@ public class PostActivity extends AppCompatActivity {
                 startPosting();
             }
         });
+
+
+        Spinner spinner = (Spinner) findViewById(R.id.loc_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.location_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
     }
 
+
+
+// Setting timesetlistener for respective start and end time
     @Override
     protected Dialog onCreateDialog(int id){
         switch (id){
@@ -165,6 +185,8 @@ public class PostActivity extends AppCompatActivity {
         }
     }
 
+
+//to show timepicker dialog
     private void showTimePickerDialog(){
         mStartTime = (TextView) findViewById(R.id.startTimeField);
         mEndTime = (TextView) findViewById(R.id.endTimeField);
@@ -203,7 +225,7 @@ public class PostActivity extends AppCompatActivity {
         }
     };
 
-
+//posting stuffs in the firebase database
     private void startPosting(){
         mProgress.setMessage("Posting...");
 
@@ -231,6 +253,8 @@ public class PostActivity extends AppCompatActivity {
                     newPost.child("end_date").setValue(enddate_value);
                     newPost.child("start_time").setValue(starttime_value);
                     newPost.child("end_time").setValue(endtime_value);
+                    newPost.child("Latitude").setValue(latitude);
+                    newPost.child("Longitude").setValue(longitude);
 
 
 
@@ -241,7 +265,7 @@ public class PostActivity extends AppCompatActivity {
         }
     }
 
-
+//gallery intent request
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -252,4 +276,51 @@ public class PostActivity extends AppCompatActivity {
         }
 
     }
+
+    //Spinner item selection
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+        String sLocation = parent.getItemAtPosition(i).toString();
+        mLocation.setText(sLocation);
+        convert(sLocation);
+    }
+
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+
+    public void convert(String a){
+        switch (a){
+            case "CV Raman":
+                latitude = 27.619333;
+                longitude = 85.539036;
+                break;
+            case "Fountain":
+                latitude = 27.618634;
+                longitude = 85.538583;
+                break;
+            case "Football Ground":
+                 latitude = 27.618672;
+                longitude = 85.537009;
+                break;
+            case "Basketball Ground":
+                 latitude = 27.618282;
+                longitude = 85.536414;
+                break;
+            case "Administration":
+               latitude = 27.619537;
+                longitude = 85.538627;
+                break;
+            case "KU Cafe":
+                 latitude = 27.617834;
+                longitude = 85.537791;
+                break;
+
+        }
+    }
+
+
 }

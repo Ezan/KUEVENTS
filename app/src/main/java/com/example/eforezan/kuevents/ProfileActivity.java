@@ -29,6 +29,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -51,11 +53,14 @@ public class ProfileActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
 
+    DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
         editText = (EditText) findViewById(R.id.editTextDisplayName);
         imageView = (ImageView) findViewById(R.id.imageView);
@@ -148,6 +153,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         FirebaseUser user = mAuth.getCurrentUser();
+//don't know what this does
 
         if (user != null && profileImageUrl != null) {
             UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
