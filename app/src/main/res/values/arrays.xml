@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="location_array">
+        <item>CV Raman</item>
+        <item>Fountain</item>
+        <item>Football Ground</item>
+        <item>Basketball Ground</item>
+        <item>Administration</item>
+        <item>KU Cafe</item>
+
+    </string-array>
+
+</resources>
+
